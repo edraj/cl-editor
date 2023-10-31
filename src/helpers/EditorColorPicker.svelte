@@ -1,12 +1,3 @@
-<div style="display: {show ? 'block' : 'none'}">
-  <div class="color-picker-overlay" on:click="{close}"></div>
-  <div class="color-picker-wrapper">
-    {#each btns as btn}
-    <button type="button" class="color-picker-btn" style="background-color:{btn.color};" on:click="{event => selectColor(btn)}">{btn.text || ''}</button>
-    {/each}
-  </div>
-</div>
-
 <script>
     import { createEventDispatcher } from "svelte";
 
@@ -18,8 +9,8 @@
     export let colors = [];
 
     $: btns = colors
-            .map((color) => ({ color }))
-            .concat([{ text: '#', modal: true }]);
+        .map((color) => ({ color }))
+        .concat([{ text: '#', modal: true }]);
 
     function close() {
         show = false;
@@ -31,6 +22,17 @@
     }
 
 </script>
+
+<div style="display: {show ? 'block' : 'none'}">
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div class="color-picker-overlay" on:click="{close}"></div>
+  <div class="color-picker-wrapper">
+    {#each btns as btn}
+    <button type="button" class="color-picker-btn" style="background-color:{btn.color};" on:click="{event => selectColor(btn)}">{btn.text || ''}</button>
+    {/each}
+  </div>
+</div>
 
 <style>
     .color-picker-wrapper {

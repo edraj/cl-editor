@@ -1,5 +1,54 @@
+<script>
+    import { createEventDispatcher } from "svelte";
+
+    let dispatcher = new createEventDispatcher();
+
+    export let show = false;
+    export let text = '';
+    export let event = '';
+    export let title = '';
+    export let label = '';
+    export let error = false;
+
+    let refs = {}
+
+    const inputType = (e) => {
+        e.type = event.includes('Color') ? 'color' : 'text';
+    };
+
+    $:{
+        if (show) {
+            setTimeout(() => {
+                refs.text.focus();
+            });
+        }
+    }
+
+    function confirm() {
+        if (text) {
+            dispatcher(event,text);
+            cancel();
+        } else {
+            error = true;
+            refs.text.focus();
+        }
+    }
+
+    function cancel() {
+        show = false;
+        text = '';
+        error = false;
+    }
+
+    function hideError() {
+        error = false;
+    }
+</script>
+
 <svelte:options accessors={true}></svelte:options>
 {#if show}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="cl-editor-overlay" on:click="{cancel}"></div>
   <div class="cl-editor-modal">
     <div class="modal-box">
@@ -20,53 +69,6 @@
     </div>
   </div>
 {/if}
-
-<script>
-  import { createEventDispatcher } from "svelte";
-
-  let dispatcher = new createEventDispatcher();
-
-  export let show = false;
-  export let text = '';
-  export let event = '';
-  export let title = '';
-  export let label = '';
-  export let error = false;
-
-  let refs = {}
-  
-  const inputType = (e) => {
-    e.type = event.includes('Color') ? 'color' : 'text';
-  };
-
-  $:{
-    if (show) {
-      setTimeout(() => {
-        refs.text.focus();
-      });
-    }
-  }
-
-  function confirm() {
-    if (text) {
-      dispatcher(event,text);
-      cancel();
-    } else {
-      error = true;
-      refs.text.focus();
-    }
-  }
-
-  function cancel() {
-    show = false;
-    text = '';
-    error = false;
-  }
-
-  function hideError() {
-    error = false;
-  }
-</script>
 
 <style>
 .cl-editor-modal {

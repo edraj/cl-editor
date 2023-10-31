@@ -42,7 +42,7 @@ export default [
     plugins
   },
   {
-    input: 'src/app.js',
+    input: 'src/main.js',
     output:  {
       file: 'dist/index.dev.js',
       format: 'iife',
