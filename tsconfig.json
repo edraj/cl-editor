@@ -3,6 +3,7 @@
         "declaration": true,
         "noImplicitAny": false,
         "noImplicitReturns": true,
+        "verbatimModuleSyntax": true,
         "typeRoots": [
             "types"
         ],

@@ -16,6 +16,8 @@ const plugins = [
 	}),
   resolve({
     brower: true,
+    exportConditions: ['svelte'],
+    extensions: ['.svelte'],
     dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
   }),
   commonjs(),
