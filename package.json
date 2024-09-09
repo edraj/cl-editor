@@ -51,5 +51,10 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "svelte-preprocess": "^6.0.2",
     "vite": "^5.4.2"
+  },
+  "exports": {
+    ".": {
+      "svelte": "./dist/index.js"
+    }
   }
 }
